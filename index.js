@@ -11,7 +11,7 @@ conexao.connect(err => {
     }else{
         console.log('conectado com sucesso')
         const app = customExpress() // app executa o module.export
-        app.listen(3001, () => console.log("servidor rodando na porta 3000"))  // Cria um UNIX socket na porta especificada
+        app.listen( process.env.PORT || 3001, () => console.log("servidor rodando na porta 3000"))  // Cria um UNIX socket na porta especificada
 
     }
 })
