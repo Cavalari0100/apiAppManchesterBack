@@ -1,14 +1,14 @@
 const moment = require("../node_modules/moment")
 const conexao = require('../infraestrutura/conexao')
 const {MongoCliente,ObjectId} = require("mongodb")
-const conecta = conexao.db("appMAnchester").collection("pacientes")
+const conecta = conexao.db("appManchester").collection("pacientes")
 var mongooseConection = require("../infraestrutura/conexaoMongoose")
 const {Error} = require("mongoose")
 const paciente = require("../mongoose/pacientes")
 
 
 class Pacientes{
-    async listAll(){
+    async listAll(res){
         let result = null
             try{
                 result = await conecta.find().toArray()
@@ -17,7 +17,7 @@ class Pacientes{
                 console.log(e)
             }
             finally{
-                return result
+                res.status(200).send(result);
             }
     }
     async insertOne(document,res){
