@@ -35,5 +35,23 @@ class Enfermeiros {
         }
 
     }
+    async validationLogin(doc, res) {
+        const result = await conecta.findOne({ email: doc.email }).then(response => {
+            return response;
+        }).catch(err => {
+            return false;
+        })
+        if (!result) {
+            res.status(400).send({error:"Email nao encontrado", success:false})
+            return false
+        }
+        if (result.password != doc.password) { 
+            res.status(400).send({error:"Senha invalida",success:false})
+            return false
+        }
+        res.status(200).send({error:"",success:true})
+        return true;
+
+    }
 }
 module.exports = new Enfermeiros
