@@ -13,6 +13,15 @@ module.exports = app => {
         Enfermeiros.validationLogin(document,res);
 
     })
+    app.put('/enfermeiro/:id', async (req,res) => {
+        const id = req.params.id;
+        const response = await Enfermeiros.updateOne(id,req.body)
+        res.status(response.status).send(response.response);
+    })
+    app.delete('/enfermeiro/:id', async (req,res) => {
+        id = req.params.id;
+        Enfermeiros.deleteOne(id,res);
+    })
 
     
 }
